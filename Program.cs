@@ -2,6 +2,8 @@
 {
     internal class Program
     {
+        public static List<Security> Användare = new List<Security>();
+
         static void Main(string[] args)
         {
             Console.WriteLine("Ange 1 för Admin. Eller 2 för Användare.");
@@ -9,11 +11,13 @@
 
             if (input == 1)
             {
-
+                var security = new Security(1234, "Admin");
+                security.Login();
             }
-            if (input == 2)
+            else if (input == 2)
             {
-
+                var security = new Security(5678, "User");
+                security.Login();
             }
             else
             {

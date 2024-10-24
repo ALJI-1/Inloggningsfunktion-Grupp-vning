@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Inloggningsfunktion_Gruppövning
 {
-    internal class Användare
+    public class Användare
     {
         public void MetodAnvändareMeny()
         {
             Console.WriteLine("Välkommen Användare!");
             Console.WriteLine("1. Visa lösenord");
             Console.WriteLine("6. Avsluta programmet");
-            Console.Write("Välj ett alternativ: ");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -27,6 +26,10 @@ namespace Inloggningsfunktion_Gruppövning
                     Console.WriteLine("Felaktigt val, försök igen");
                     break;
             }
+        }
+        public void VisaLösenord()
+        {
+            Console.WriteLine("Ditt lösenord är: ");
         }
     }
 }

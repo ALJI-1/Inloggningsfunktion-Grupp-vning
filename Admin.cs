@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Inloggningsfunktion_Gruppövning
 {
-    internal class Admin
+    public class Admin
     {
         public void MetodAdminMeny()
         {
@@ -19,7 +19,7 @@ namespace Inloggningsfunktion_Gruppövning
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Skapa användare");
+                    AddUser();
                     break;
                 case "2":
                     Console.WriteLine("Inställningar");
@@ -33,6 +33,19 @@ namespace Inloggningsfunktion_Gruppövning
             }
         }
 
-    }
+        public void AddUser()
+        {
+            Console.WriteLine("Ange användarnamn: ");
+            string userName = Console.ReadLine();
+            Console.WriteLine("Ange lösenord: ");
+            int password = int.Parse(Console.ReadLine());
+
+            Security user = new Security(password, userName);
+            Program.Användare.Add(user);
+            Console.WriteLine("Användare skapad!");
+
+            MetodAdminMeny();
+        }
+
     }
 }
