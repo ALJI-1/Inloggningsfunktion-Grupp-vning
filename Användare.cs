@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Inloggningsfunktion_Gruppövning
 {
-    internal class Användare
+    public class Användare
     {
-        public void MetodAnvändareMeny()
+        public void MetodAnvändareMeny(Security security)
         {
             Console.WriteLine("Välkommen Användare!");
             Console.WriteLine("1. Visa lösenord");
@@ -18,7 +19,7 @@ namespace Inloggningsfunktion_Gruppövning
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Visa lösenord");
+                    Console.WriteLine($"Ditt lösenord är: {security.Password}");
                     break;
                 case "6":
                     Console.WriteLine("Avsluta programmet");
@@ -28,5 +29,9 @@ namespace Inloggningsfunktion_Gruppövning
                     break;
             }
         }
+        //Avsulata och Vissa löserord.
+    
+
+
     }
 }

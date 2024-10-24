@@ -1,13 +1,13 @@
-﻿namespace Inloggningsfunktion_Gruppövning
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace Inloggningsfunktion_Gruppövning
 {
-    public class Program
+    internal class Program
     {
+        public static List<Security> Användare = new List<Security>();
         static void Main(string[] args)
         {
-
             
-
-
 
             Console.WriteLine("Ange 1 för Admin. Eller 2 för Användare.");
             int input = int.Parse(Console.ReadLine());

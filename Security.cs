@@ -10,7 +10,13 @@ namespace Inloggningsfunktion_Gruppövning
     internal class Security
     {
         public int Password { get; set; }
+        public string AnvändarNamn { get; set; }
 
+        public Security(int password, string användarNamn)
+        {
+            Password = password;
+            AnvändarNamn = användarNamn;
+        }
         public void Login()
         {
             Console.WriteLine("Ange lösenord: ");
