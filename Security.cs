@@ -1,43 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
 namespace Inloggningsfunktion_Gruppövning
 {
-    internal class Security
+    public class Security
     {
         public int Password { get; set; }
         public string AnvändarNamn { get; set; }
 
+        
+        public Security()
+        {
+        }   
         public Security(int password, string användarNamn)
         {
             Password = password;
             AnvändarNamn = användarNamn;
         }
+
         public void Login()
         {
-            Console.WriteLine("Ange lösenord: ");
-            Password = int.Parse(Console.ReadLine());
-            if (Password == 1234)
+            Security security = new Security();
+
+            while (true)
             {
-                Console.WriteLine("Välkommen Admin!");
-                Admin admin = new Admin();
-                admin.MetodAdminMeny();
+                Console.WriteLine("Ange lösenord: ");
+                Password = int.Parse(Console.ReadLine());
+                foreach (var users in Program.users)
+                {
+                    if (Password == 1234)
+                    {
+                        Console.WriteLine("Välkommen Admin!");
+                        Admin admin = new Admin();
+                        admin.MetodAdminMeny();
+                    }
+                    else if (Password == 5678)
+                    {
+                        Console.WriteLine("Välkommen Användare!");
+                        Användare användare = new Användare();
+                        användare.MetodAnvändareMeny();
+                    }
+                    else if (Password == users.Password)
+                    {
+                        Console.WriteLine("Programmet avslutas");
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Felaktigt lösenord, försök igen");
+
+                    }
+                }
+
+                
+               
             }
-            else if (Password == 5678)
-            {
-                Console.WriteLine("Välkommen Användare!");
-                Användare användare = new Användare();
-                användare.MetodAnvändareMeny();
-            }
-            else
-            {
-                Console.WriteLine("Felaktigt lösenord, försök igen");
-                Login();
-            }
+            
         }
+        public void ShowPassword()
+        {
+            Console.WriteLine($"Ditt lösenord är: {Password}");
+        }
+       
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,11 +10,9 @@ namespace Inloggningsfunktion_Gruppövning
 {
     public class Admin
     {
-        
+        Security användare = new Security();
         public void MetodAdminMeny()
         {
-
-            
             Console.WriteLine("Välkommen Admin!");
             Console.WriteLine("1. Skapa användare");
             Console.WriteLine("2. Inställningar");
@@ -23,7 +22,7 @@ namespace Inloggningsfunktion_Gruppövning
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Skapa användare");
+                    AddUser();
                     break;
                 case "2":
                     Console.WriteLine("Inställningar\n1. Byt till slumpmässig färg på texten\n2. Ändra konsolfönstrets titel");
@@ -43,6 +42,8 @@ namespace Inloggningsfunktion_Gruppövning
 
                 case "6":
                     Console.WriteLine("Avsluta programmet");
+                    användare.ExitProgram(ref användare);
+
                     break;
                 default:
                     Console.WriteLine("Felaktigt val, försök igen");
@@ -50,18 +51,25 @@ namespace Inloggningsfunktion_Gruppövning
             }
         }
         public void AddUser()
-{
-        Console.WriteLine("Ange användarnamn: ");
-        string userName = Console.ReadLine();
-        Console.WriteLine("Ange lösenord: ");
-        int password = int.Parse(Console.ReadLine());
+        {
+            Console.WriteLine("Ange användarnamn: ");
+            string userName = Console.ReadLine();
+            Console.WriteLine("Ange lösenord (siffror): ");
+            string password = Console.ReadLine();
 
-        Security user = new Security(password, userName);
-        Program.Användare.Add(user);
-        Console.WriteLine("Användare skapad!");
-
-        MetodAdminMeny();
-}
+            if (int.TryParse(password, out int passwordSafe))
+            {
+                Security user = new Security(passwordSafe, userName);
+                Program.users.Add(user);
+                Console.WriteLine("Användare skapad!");
+                MetodAdminMeny();
+            }
+            else
+            {
+                Console.WriteLine("Felaktigt lösenord, försök igen");
+                AddUser();
+            }          
+        }
         public static void ChangeFontRGB()
         {
             Random random = new Random();
@@ -77,6 +85,5 @@ namespace Inloggningsfunktion_Gruppövning
             Console.WriteLine($"Färgen ändrad till: {randomColor}. Tryck enter.");
             Console.ReadLine();
         }
-
     }
 }

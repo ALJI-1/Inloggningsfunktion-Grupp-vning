@@ -9,29 +9,38 @@ namespace Inloggningsfunktion_Gruppövning
 {
     public class Användare
     {
-        public void MetodAnvändareMeny(Security security)
+        Security användare = new Security();
+        public void MetodAnvändareMeny()
         {
             Console.WriteLine("Välkommen Användare!");
             Console.WriteLine("1. Visa lösenord");
             Console.WriteLine("6. Avsluta programmet");
             Console.Write("Välj ett alternativ: ");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
+            if (input == null)
+            {
+                Console.WriteLine("Felaktigt val, försök igen");
+                return;
+            }
             switch (input)
             {
                 case "1":
-                    Console.WriteLine($"Ditt lösenord är: {security.Password}");
+                    användare.ShowPassword();
                     break;
                 case "6":
-                    Console.WriteLine("Avsluta programmet");
+                    ExitProgram(ref användare);
                     break;
                 default:
                     Console.WriteLine("Felaktigt val, försök igen");
                     break;
             }
         }
-        //Avsulata och Vissa löserord.
-    
 
-
+        private void ExitProgram(ref Security användare)
+        {
+            
+            Console.WriteLine("Programmet avslutas...");
+            Environment.Exit(0);
+        }
     }
 }
