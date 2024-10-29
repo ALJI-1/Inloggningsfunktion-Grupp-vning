@@ -20,71 +20,49 @@ namespace Inloggningsfunktion_Gruppövning
         public Security()
         {
         }   
-        public Security(int password, string användarNamn)
+        public Security(int password, string användarNamn, bool isAdmin)
         {
             Password = password;
             AnvändarNamn = användarNamn;
+            IsAdmin = isAdmin;
         }
 
         public void Login()
         {
-            Security security = new Security();
-
             while (true)
             {
                 Console.WriteLine("Ange lösenord: ");
-                Password = int.Parse(Console.ReadLine());
-                foreach (var users in Program.users)
+                int inputPassword = int.Parse(Console.ReadLine());
+
+                // Hitta användare baserat på lösenord
+                Security currentUser = Program.users.FirstOrDefault(u => u.Password == inputPassword);
+
+                if (currentUser != null)
                 {
-                    if (Password == 1234)
+                    // Kontrollera om användaren är admin
+                    if (currentUser.IsAdmin)
                     {
-                        Console.WriteLine("Välkommen Admin!");
-                        Admin admin = new Admin();
-                        admin.MetodAdminMeny();
-                    }
-                    else if (Password == 5678)
-                    {
-                        Console.WriteLine("Välkommen Användare!");
                         Användare användare = new Användare();
-                        användare.MetodAnvändareMeny();
-                    }
-                    else if (Password == users.Password)
-                    {
-                        Console.WriteLine("Programmet avslutas");
-                        break;
+                        användare.MetodAdminMeny();
                     }
                     else
                     {
-                        Console.WriteLine("Felaktigt lösenord, försök igen");
-
+                        Användare användare = new Användare();
+                        användare.MetodAnvändareMeny();
                     }
+                    break;  // Avsluta loopen efter lyckad inloggning
                 }
-                   
-            }
-            
-        }
-        public void LogOutAdmin(DateTime dateTime)
-        {
-            if ((DateTime.Now - dateTime).TotalSeconds >= 1)
-            {
-                Console.WriteLine("Du har loggats ut");
-                Console.ReadKey();
-                this.Login();
-            }       
-        }
-        public void LogOutUser(DateTime dateTime)
-        {
-            if ((DateTime.Now - dateTime).TotalSeconds >= 1)
-            {
-                Console.WriteLine("Du har loggats ut");
-                Console.ReadKey();
-                Login();
+                else
+                {
+                    Console.WriteLine("Felaktigt lösenord, försök igen.");
+                }
             }
         }
+
+
         public void ShowPassword()
         {
             Console.WriteLine($"Ditt lösenord är: {Password}");
         }
-       
     }
 }
