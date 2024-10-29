@@ -13,20 +13,28 @@ namespace Inloggningsfunktion_Gruppövning
         Security användare = new Security();
         public void MetodAdminMeny()
         {
+            DateTime LogInSession = DateTime.Now;
+
+            Security användare = new Security();
+
+            användare.LogOutAdmin(LogInSession);
+
             Console.WriteLine("Välkommen Admin!");
             Console.WriteLine("1. Skapa användare");
             Console.WriteLine("2. Inställningar");
+            Console.WriteLine("3. Gå tillbaka till login");
             Console.WriteLine("6. Avsluta programmet");
             Console.Write("Välj ett alternativ: ");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
             switch (input)
             {
                 case "1":
                     AddUser();
                     break;
                 case "2":
+                    Console.Clear();
                     Console.WriteLine("Inställningar\n1. Byt till slumpmässig färg på texten\n2. Ändra konsolfönstrets titel");
-                    int choice = int.Parse(Console.ReadLine());
+                    int choice = int.Parse(Console.ReadLine()!);
                     if (choice == 1)
                     {
                         ChangeFontRGB();
@@ -34,16 +42,18 @@ namespace Inloggningsfunktion_Gruppövning
                     if (choice == 2)
                     {
                         Console.WriteLine("Ändra titel för programmet.\nTitel?");
-                        String? titel = Console.ReadLine();
-                        Console.Title = titel;
+                        string? titel = Console.ReadLine();
+                        Console.Title = titel!;
                         Console.WriteLine($"Ny titel: {titel}");
                     }
                     break;
-
+                case "3":
+                    Console.WriteLine("3. Gå tillbaka till login");
+                    användare.Login();
+                    break;
                 case "6":
                     Console.WriteLine("Avsluta programmet");
-                    användare.ExitProgram(ref användare);
-
+                    //användare.ExitProgram(ref användare);
                     break;
                 default:
                     Console.WriteLine("Felaktigt val, försök igen");
@@ -53,13 +63,13 @@ namespace Inloggningsfunktion_Gruppövning
         public void AddUser()
         {
             Console.WriteLine("Ange användarnamn: ");
-            string userName = Console.ReadLine();
+            string? userName = Console.ReadLine();
             Console.WriteLine("Ange lösenord (siffror): ");
-            string password = Console.ReadLine();
+            string? password = Console.ReadLine();
 
             if (int.TryParse(password, out int passwordSafe))
             {
-                Security user = new Security(passwordSafe, userName);
+                Security user = new Security(passwordSafe, userName!);
                 Program.users.Add(user);
                 Console.WriteLine("Användare skapad!");
                 MetodAdminMeny();
@@ -68,7 +78,7 @@ namespace Inloggningsfunktion_Gruppövning
             {
                 Console.WriteLine("Felaktigt lösenord, försök igen");
                 AddUser();
-            }          
+            }
         }
         public static void ChangeFontRGB()
         {

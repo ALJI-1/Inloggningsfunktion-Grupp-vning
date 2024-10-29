@@ -7,10 +7,12 @@ namespace Inloggningsfunktion_Gruppövning
     {
         public static List<Security> users = new List<Security>();
 
-
+        
         static void Main(string[] args)
         {
+            
             bool onOff = true;
+
             do
             {
                 Security användare = new Security();

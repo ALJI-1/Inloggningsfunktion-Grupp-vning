@@ -10,10 +10,13 @@ namespace Inloggningsfunktion_Gruppövning
 {
     public class Security
     {
+        
+
         public int Password { get; set; }
         public string AnvändarNamn { get; set; }
+        public bool IsAdmin { get; set; }
 
-        
+
         public Security()
         {
         }   
@@ -56,11 +59,27 @@ namespace Inloggningsfunktion_Gruppövning
 
                     }
                 }
-
-                
-               
+                   
             }
             
+        }
+        public void LogOutAdmin(DateTime dateTime)
+        {
+            if ((DateTime.Now - dateTime).TotalSeconds >= 1)
+            {
+                Console.WriteLine("Du har loggats ut");
+                Console.ReadKey();
+                this.Login();
+            }       
+        }
+        public void LogOutUser(DateTime dateTime)
+        {
+            if ((DateTime.Now - dateTime).TotalSeconds >= 1)
+            {
+                Console.WriteLine("Du har loggats ut");
+                Console.ReadKey();
+                Login();
+            }
         }
         public void ShowPassword()
         {

@@ -9,11 +9,14 @@ namespace Inloggningsfunktion_Gruppövning
 {
     public class Användare
     {
+        
+
         Security användare = new Security();
         public void MetodAnvändareMeny()
         {
             Console.WriteLine("Välkommen Användare!");
             Console.WriteLine("1. Visa lösenord");
+            
             Console.WriteLine("6. Avsluta programmet");
             Console.Write("Välj ett alternativ: ");
             string? input = Console.ReadLine();
