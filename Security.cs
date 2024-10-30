@@ -10,12 +10,9 @@ namespace Inloggningsfunktion_Gruppövning
 {
     public class Security
     {
-        
-
         public int Password { get; set; }
         public string AnvändarNamn { get; set; }
         public bool IsAdmin { get; set; }
-
 
         public Security()
         {
@@ -58,7 +55,6 @@ namespace Inloggningsfunktion_Gruppövning
                 }
             }
         }
-
 
         public void ShowPassword()
         {

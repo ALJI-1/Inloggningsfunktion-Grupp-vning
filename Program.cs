@@ -7,7 +7,6 @@ namespace Inloggningsfunktion_Gruppövning
     {
         public static List<Security> users = new List<Security>();
 
-
         static void Main(string[] args)
         {
             Security användare1 = new Security(1234, "Admin", true);
